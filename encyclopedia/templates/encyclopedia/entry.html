@@ -8,8 +8,9 @@
     <!-- Markdown content -->
     {{ content | safe}}
 
-    <form action="">
+    <form action="{% url 'edit' %}" method="GET">
         <div class="form-group">
+            <input type="hidden" name="title" value="{{ title }}">
             <input class="form-control" type="submit" value="Edit" style="width: max-content;">
         </div>
     </form>

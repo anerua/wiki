@@ -57,3 +57,19 @@ def save(request):
         return render(request, "encyclopedia/entry.html", {
             "title": title, "content": contents
         })
+
+def edit(request):
+    title = request.GET.get('title')
+    contents = util.get_entry(title)
+    return render(request, "encyclopedia/edit.html", {
+        "title": title, "content": contents
+    })
+
+def update(request):
+    title = request.GET.get('title')
+    content = request.GET.get('content')
+    util.save_entry(title, content)
+    contents = markdown2.markdown(util.get_entry(title))
+    return render(request, "encyclopedia/entry.html", {
+        "title": title, "content": contents
+    })
