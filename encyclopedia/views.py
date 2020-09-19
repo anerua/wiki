@@ -3,6 +3,7 @@ from django.shortcuts import render
 from . import util
 
 import markdown2
+import random
 
 def index(request):
     return render(request, "encyclopedia/index.html", {
@@ -72,4 +73,12 @@ def update(request):
     contents = markdown2.markdown(util.get_entry(title))
     return render(request, "encyclopedia/entry.html", {
         "title": title, "content": contents
+    })
+
+def rand(request):
+    entries = util.list_entries()
+    lucky = random.choice(entries)
+    contents = markdown2.markdown(util.get_entry(lucky))
+    return render(request, "encyclopedia/entry.html", {
+        "title": lucky, "content": contents
     })
