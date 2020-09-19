@@ -6,6 +6,7 @@
 
 {% block body %}
     <h1>{{ title }}</h1>
+    <hr>
 
     <form style="width: 80%;" action="{% url 'update' %}" method="GET">
         <input type="hidden" name="title" value="{{ title }}">
