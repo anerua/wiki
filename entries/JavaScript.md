@@ -1,3 +1,3 @@
 #JavaScript
 
-JavaScript is a **computer** programming language.
+JavaScript is a **programming language** that is one of the core technologies of the **World Wide Web**

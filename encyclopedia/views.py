@@ -14,14 +14,16 @@ def wikipage(request, title):
     mk2 = util.get_entry(title)
     if mk2:
         contents = markdown2.markdown(mk2)
+        return render(request, "encyclopedia/entry.html", {
+            "title": title, "content": contents
+        })
     else:
-        contents = "Sorry, the page you requested for does not exist!"
-        title = "Page not found"
+        title = "Page Not Found"
+        contents = "Sorry, the page you requested for does not exist."
+        return render(request, "encyclopedia/error.html", {
+            "title": title, "content": contents
+        })
     
-    return render(request, "encyclopedia/entry.html", {
-        "title": title, "content": contents
-    })
-
 def results(request):
     query = request.GET.get('query')
     entries = util.list_entries()
@@ -47,9 +49,9 @@ def save(request):
     content = request.GET.get('content')
     entries = util.list_entries()
     if title in entries:
-        contents = "Sorry, the wiki already exists!"
-        title = "Saving Failed"
-        return render(request, "encyclopedia/entry.html", {
+        title = "Page Already Exists!"
+        contents = "Sorry, this wiki already exists."
+        return render(request, "encyclopedia/error.html", {
             "title": title, "content": contents
         })
     else:
